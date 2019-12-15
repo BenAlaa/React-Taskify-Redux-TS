@@ -33,21 +33,16 @@ const MainSlider: React.SFC<MainSliderProps> = ({props}) => {
 
 
                         </div>
-                        <div className=" carousel-item slid-item item-three">
+                        {/* <div className=" carousel-item slid-item item-three">
                             <h1 className="Slid-item-quote col-lg-6 offset-lg-3">"The shorter way to do many things is to only do one thing at a time." - Mozart</h1>
                             <button className="btn-start col-6 col-sm-3 col-md-2 col-lg-2 offset-3 offset-sm-5 offset-md-5" onClick={() => handleStart()}>Get Start</button>
 
-
-
-
-
-
-                        </div>
+                        </div> */}
                     </div>
                     <ol className="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
                         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        {/* <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> */}
                     </ol>
                 </div>
             </div>
