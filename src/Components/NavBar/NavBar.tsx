@@ -12,7 +12,7 @@ const NavBar: React.SFC<NavBarProps> = ({ user }) => {
 
         <nav className="navbar navbar-expand-lg navbar-light  navbar-inner fixed-top unAuth-navbar ">
             <div className="container">
-                <NavLink className="navbar-brand" to="/main"><img src={logo} alt="logo" className="logo" />Taskify</NavLink>
+                <NavLink className="navbar-brand" to="/main"><img src={logo} alt="logo" className="logo" />Tasky</NavLink>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
