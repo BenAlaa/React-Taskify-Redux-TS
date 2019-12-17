@@ -1,0 +1,78 @@
+.task-container{
+    /* padding:20px;
+    padding-left: 40px !important; */
+    min-height: 80px;
+    border-radius: 20px;
+    transition: all 250ms ease-in-out;
+    -webkit-box-shadow: 0px 5px 20px 1px #b7b5bb4d;
+    -moz-box-shadow: 0px 5px 20px 1px #b7b5bb4d;
+    box-shadow: 0px 5px 20px 1px #b7b5bb4d;
+}
+
+
+.description-container{
+    padding-top: 10px;
+    color: rgb(80, 79, 79);
+    padding-left: 30px !important;
+}
+.description-container-completed{
+    padding-top: 10px;
+    padding-left: 30px !important;
+    text-decoration: line-through;
+    color: rgba(153, 152, 152, 0.438);
+
+
+}
+.task-btns-container{
+    margin-right: 10px;
+}
+.task-btn-icon-edit-container, .task-btn-icon-check-container{
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    margin: 10px;
+    padding-top: 7px;
+    padding-left: 7px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 250ms ease-in-out;
+    -webkit-box-shadow: 0px 5px 20px 1px #b7b5bb4d;
+    -moz-box-shadow: 0px 5px 20px 1px #b7b5bb4d;
+    box-shadow: 0px 5px 20px 1px #b7b5bb4d;
+
+}
+.task-btn-icon-edit-container:hover, .task-btn-icon-check-container:hover{
+    transform: scale(1.1);
+}
+.task-btn-icon-edit-container:hover{
+    background-color: rgba(83, 144, 155, 0.664);
+    color: white;
+    -webkit-box-shadow: 0px 0px 10px 5px #a6d7e454;
+    -moz-box-shadow: 0px 0px 10px 5px #a6d7e454;
+    box-shadow: 0px 0px 10px 5px #a6d7e46b;
+
+}
+.task-btn-icon-check-container:hover{
+    background-color: rgba(83, 155, 119, 0.664);
+    color: white;
+    -webkit-box-shadow: 0px 0px 10px 5px #a6e4cf54;
+    -moz-box-shadow: 0px 0px 10px 5px #a6e4cf54;
+    box-shadow: 0px 0px 10px 5px #a6e4cf54;
+
+}
+
+.task-btn-icon-edit-container{
+    background-color: rgba(155, 217, 228, 0.445);
+    color: rgba(77, 130, 139, 0.678);
+    -webkit-box-shadow: 0px 0px 5px 3px #a6d7e454;
+    -moz-box-shadow: 0px 0px 5px 3px #a6d7e454;
+    box-shadow: 0px 0px 5px 3px #a6d7e454;
+}
+.task-btn-icon-check-container{
+    background-color: rgba(155, 228, 191, 0.445);
+    color: rgba(77, 139, 123, 0.712);
+
+    -webkit-box-shadow: 0px 0px 5px 3px #a6d7e454;
+    -moz-box-shadow: 0px 0px 5px 3px #a6d7e454;
+    box-shadow: 0px 0px 5px 3px #a6e4d454;
+}
