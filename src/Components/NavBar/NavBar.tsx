@@ -12,7 +12,7 @@ const NavBar: React.SFC<NavBarProps> = ({ user }) => {
 
         <nav className="navbar navbar-expand-lg navbar-light  navbar-inner fixed-top unAuth-navbar ">
             <div className="container">
-                <NavLink className="navbar-brand" to="/main"><img src={logo} alt="logo" className="logo" />Tasky</NavLink>
+                <NavLink className="navbar-brand" to="/main"><img src={logo} alt="logo" className="logo" />Taskify</NavLink>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -22,16 +22,23 @@ const NavBar: React.SFC<NavBarProps> = ({ user }) => {
                         <li className="nav-item active navbar-item col-lg-2">
                             <NavLink className="nav-link " to="/main">Main </NavLink>
                         </li>
-                        
+
+
+
+                        <li className="nav-item navbar-item">
+                            <NavLink className="nav-link" to="/tasks">ToDo</NavLink>
+                        </li>
+                        {user &&
+                            <li className="nav-item navbar-item">
+                                <NavLink className="nav-link" to="/profile">Profile</NavLink>
+                            </li>
+                        }
 
                         {!user &&
                             <li className="nav-item navbar-item">
                                 <NavLink className="nav-link" to="/login">login</NavLink>
                             </li>
                         }
-                        <li className="nav-item navbar-item">
-                            <NavLink className="nav-link" to="/profile">Profile</NavLink>
-                        </li>
                         {user &&
                             <React.Fragment>
                                 <li className="nav-item dropdown navbar-item">
@@ -39,8 +46,8 @@ const NavBar: React.SFC<NavBarProps> = ({ user }) => {
                                         {user.name}
                                     </NavLink>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <NavLink className="dropdown-item" to="/tasks">ToDo</NavLink>
                                         <NavLink className="dropdown-item" to="/profile">Profile</NavLink>
-                                        <div className="dropdown-divider"></div>
                                         <NavLink className="dropdown-item" to="/logout">Logout</NavLink>
                                     </div>
                                 </li>
