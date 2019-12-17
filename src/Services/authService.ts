@@ -1,42 +1,45 @@
 import http from './httpService';
 import jwt from 'jsonwebtoken';
 import jwtDecode from 'jwt-decode';
-import IUser  from './../Models/IUser';
+import {IUser}  from '../Types/AppTypes';
 import {getUsers} from './userService';
 
 const tokenKey: string = "token";
 
 
-
-export async function login(email: string, password: string, res?: string) {
+export enum Response{
+    Success,
+    Fail
+}
+async function login(email: string, password: string, res?: Response) {
     const users = await getUsers();
     const user: IUser = users.find((user: any) => user.email === email);
-    if (!user) return res = "400";
+    if (!user) return res = Response.Fail;
 
     const isValidPassword: boolean = user.password === password;
-    if (!isValidPassword) return res = "400";
+    if (!isValidPassword) return res = Response.Fail;
 
     const token = generateAuthToken(user);
-    if (!token) return res = "400";
+    if (!token) return res = Response.Fail;
 
     localStorage.setItem(tokenKey, token);
-    return res = "200";
+    return res = Response.Success;
 }
 
-export function loginWithJwt(jwt: string) {
+function loginWithJwt(jwt: string) {
     localStorage.setItem(tokenKey, jwt);
 }
 
-export function logout() {
+function logout() {
     localStorage.removeItem(tokenKey);
 }
 
-export function generateAuthToken(user: IUser): string {
+function generateAuthToken(user: IUser): string {
     const token = jwt.sign({ id: user.id, name: user.name, email: user.email }, "jwtPrivateKey");
     return token;
 }
 
-export function getCurrentUser() {
+function getCurrentUser() {
     try {
         const jwt =JSON.stringify(localStorage.getItem(tokenKey));
         return jwtDecode(jwt);
@@ -45,6 +48,15 @@ export function getCurrentUser() {
     }
 }
 
-export function getJwt() {
+function getJwt() {
     return localStorage.getItem(tokenKey);
+}
+
+export{
+    login,
+    loginWithJwt,
+    logout,
+    generateAuthToken,
+    getCurrentUser,
+    getJwt
 }
