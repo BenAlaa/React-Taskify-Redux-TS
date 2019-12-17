@@ -8,10 +8,10 @@ import Tasks, {TasksProps} from "./Components/Tasks/Tasks";
 import NavBar from './Components/NavBar/NavBar';
 import ProtectedRout from './Components/Common/ProtectedRout';
 import NotFound from './Components/NotFound/NotFound';
-import IUser from './Models/IUser';
+import {IUser} from './Types/AppTypes';
 import {getCurrentUser} from './Services/authService';
 
-import './App.css';
+// import './App.css';
 
 const App: React.FC = () => {
     const user = getCurrentUser();
