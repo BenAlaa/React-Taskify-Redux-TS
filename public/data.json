@@ -29,6 +29,16 @@
             "dateOfBirth":"11-09-1994",
             "title":"System Engineer",
             "hobbies":["Graphics","Games","Camping"]
+        },
+        {
+            "id":"4",
+            "name":"Ahmed Samir",
+            "email":"samir@taskify.com",
+            "password":"123456",
+            "age":"22",
+            "dateOfBirth":"01-04-1997",
+            "title":"Game Developer",
+            "hobbies":["Graphics","Games","Chess"]
         }
     ],
     "categories":[
@@ -58,60 +68,91 @@
             "id":"1",
             "description":"Go to swimming trainning",
             "categoryId":"1",
+            "isCompleted":"true",
             "userId":"1"
         },
         {
             "id":"2",
             "description":"Working on Evolvice React Task",
             "categoryId":"3",
+            "isCompleted":"false",
             "userId":"1"
         },
         {
             "id":"3",
-            "description":"Go to Cinima to watch (The Irich Man) with amr",
-            "categoryId":"4",
+            "description":"Go to Bank to deposit my sister fies",
+            "categoryId":"2",
+            "isCompleted":"false",
             "userId":"1"
         },
         {
             "id":"4",
-            "description":"testing VR on Levels Classes",
-            "categoryId":"3",
+            "description":"Go To receive Mom medical reports",
+            "categoryId":"2",
+            "isCompleted":"false",
             "userId":"1"
         },
         {
             "id":"5",
-            "description":"Go to ProsyLab",
-            "categoryId":"3",
-            "userId":"2"
+            "description":"Working on Evolvice React Task",
+            "categoryId":"5",
+            "isCompleted":"false",
+            "userId":"1"
         },
         {
             "id":"6",
-            "description":"testing VR Controls ",
-            "categoryId":"3",
-            "userId":"2"
+            "description":"Go to Cinima to watch (The Irich Man) with amr",
+            "categoryId":"4",
+            "isCompleted":"false",
+            "userId":"1"
         },
         {
             "id":"7",
-            "description":"Play Chess with Assem",
-            "categoryId":"4",
-            "userId":"2"
+            "description":"testing VR on Levels Classes",
+            "categoryId":"3",
+            "isCompleted":"false",
+            "userId":"1"
         },
         {
             "id":"8",
-            "description":"Go to Zamil Steel",
-            "categoryId":"2",
-            "userId":"3"
+            "description":"Go to ProsyLab",
+            "categoryId":"3",
+            "isCompleted":"false",
+            "userId":"2"
         },
         {
             "id":"9",
-            "description":"Go to Gym",
-            "categoryId":"1",
-            "userId":"3"
+            "description":"testing VR Controls ",
+            "categoryId":"3",
+            "isCompleted":"false",
+            "userId":"2"
         },
         {
             "id":"10",
+            "description":"Play Chess with Assem",
+            "categoryId":"4",
+            "isCompleted":"false",
+            "userId":"2"
+        },
+        {
+            "id":"11",
+            "description":"Go to Zamil Steel",
+            "categoryId":"2",
+            "isCompleted":"false",
+            "userId":"3"
+        },
+        {
+            "id":"12",
+            "description":"Go to Gym",
+            "categoryId":"1",
+            "isCompleted":"false",
+            "userId":"3"
+        },
+        {
+            "id":"13",
             "description":"Play Call of Duty",
             "categoryId":"4",
+            "isCompleted":"false",
             "userId":"3"
         }
     ]
