@@ -6,7 +6,7 @@ import { getCategories } from '../../Services/categoryService'
 import { getCurrentUser } from '../../Services/authService';
 import TaskCard from './TaskCard/TaskCard';
 import { ITasksState, ITask, ICategory, IUser } from '../../Types/AppTypes';
-import {deleteTask} from '../../Redux/Actions/TasksActions';
+import {deleteTask,creatTask,editTask,loadTasks} from '../../Redux/Actions/TasksActions';
 
 import "./Tasks.css";
 
@@ -89,8 +89,17 @@ const mapStateToProps = (state:ITasksState) : ITasksState=> {
 const mapDispatchToProps = (dispatch:Dispatch ) => {
 	return {
 		deleteTask: (task : ITask) => {
-			dispatch(deleteTask(task))
-		}
+			dispatch(deleteTask(task));
+        },
+        editTask: (task : ITask) => {
+			dispatch(editTask(task));
+        },
+        createTask: (task : ITask) => {
+			dispatch(creatTask(task));
+        },
+        loadTasks: (tasks: ITask[]) => {
+            dispatch(loadTasks(tasks));
+        }
 	}
 }
 
