@@ -1,40 +1,50 @@
-import {CREATE_TASK,EDIT_TASK,DELETE_TASK,TasksActionTypes} from '../Actions/TasksActionsTypes';
+import {CREATE_TASK,EDIT_TASK,COMPLETE_TASK,TasksActionTypes, LOAD_TASKS} from '../Actions/TasksActionsTypes';
 import {ITasksState, ITask} from '../../Types/AppTypes';
 
 
 const initialState:ITasksState={
-    tasks:[{id:0,isCompleted:false,description:"",categoryId:0,userId:0}],
+    tasks:[],
 }
 
 
-export default function tasksReducer(state = initialState, action :TasksActionTypes):ITasksState{
-    // const {id} = action.payload;
-    // newTask.id=state.tasks.length+1;
+const  tasksReducer = (state = initialState, action :TasksActionTypes):ITasksState => {
+
     switch(action.type){
 
+        case LOAD_TASKS:{
+            return{
+                tasks:[...action.payload]
+            }
+        }
         case CREATE_TASK:{
-            const newTask = action.payload;
+            const newTask = {...action.payload,id:state.tasks.length+1};
             return{
                 tasks:[...state.tasks, newTask]
             }
         }
         case EDIT_TASK:{
+            // get the index of task to be updated
             const index =state.tasks.findIndex(t => t.id === action.payload.id);
             const updatedTask = action.payload;
+            // insert the updated task in the same index of the old task
             const tasks:ITask[] ={...state.tasks.slice(0,index),...updatedTask,...state.tasks.splice(index+1)};
             return{ tasks }
         }
-        case DELETE_TASK:{
+        case COMPLETE_TASK:{
+            // get the index of task to be updated
             const index =state.tasks.findIndex(t => t.id === action.payload.id);
             const updatedTask = action.payload;
             updatedTask.isCompleted = true;
+            // insert the updated task in the same index of the old task
             const tasks:ITask[] ={...state.tasks.slice(0,index),...updatedTask,...state.tasks.splice(index+1)};
             return{ tasks }
         }
         default:
-            return state
+            return state;
     }
 }
+
+export default tasksReducer;
 
 
 

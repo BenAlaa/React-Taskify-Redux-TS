@@ -1,14 +1,17 @@
 import React from 'react';
+import {Dispatch} from 'redux';
+import {connect} from 'react-redux';
 import { getTasks } from '../../Services/taskService';
 import { getCategories } from '../../Services/categoryService'
 import { getCurrentUser } from '../../Services/authService';
 import TaskCard from './TaskCard/TaskCard';
 import { ITasksState, ITask, ICategory, IUser } from '../../Types/AppTypes';
+import {deleteTask} from '../../Redux/Actions/TasksActions';
 
 import "./Tasks.css";
 
 export interface TasksProps {
-    tasks: ITasksState;
+    // tasks: ITasksState;
 }
 
 export interface TasksState {
@@ -38,7 +41,6 @@ class Tasks extends React.Component<TasksProps, TasksState> {
                                 {
                                     this.state.categories.map(cat => {
                                         const classes = `${cat.id}` === "1" ? "nav-item nav-link category-tab active" : "nav-item nav-link category-tab";
-                                        console.log('cat-tab classes: ',classes);
                                         return <a className={classes} id={`nav-${cat.name}-tab`} key={`${cat.id}`}  data-toggle="tab" href={`#nav-${cat.name}`} role="tab" aria-controls={`nav-${cat.name}`} aria-selected="true">{cat.name}</a>
                                     })}
 
@@ -54,7 +56,7 @@ class Tasks extends React.Component<TasksProps, TasksState> {
                                                this.state.tasks.filter(t => t.categoryId === cat.id).map(t => {
                                                    return(
                                                    <div className="tab-pane fade show active" key={`${t.id}`} id="nav-home" role="tabpanel" aria-labelledby={`nav-${cat.name}-tab`}>
-                                                       <TaskCard description={t.description} id={t.id} isCompleted={`${t.isCompleted}`} userId={t.userId} categoryId={t.categoryId}></TaskCard>
+                                                       <TaskCard description={t.description} id={t.id} isCompleted={`${t.isCompleted}`} userId={t.userId} categoryId={t.categoryId} ></TaskCard>
                                                     </div>
 
                                                    )
@@ -80,6 +82,16 @@ class Tasks extends React.Component<TasksProps, TasksState> {
     }
 }
 
+const mapStateToProps = (state:ITasksState) : ITasksState=> {
+	return state;
+}
 
+const mapDispatchToProps = (dispatch:Dispatch ) => {
+	return {
+		deleteTask: (task : ITask) => {
+			dispatch(deleteTask(task))
+		}
+	}
+}
 
-export default Tasks;
+export default connect(mapStateToProps,mapDispatchToProps)(Tasks);

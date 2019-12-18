@@ -31,12 +31,13 @@ const initialState:IAppState ={
     }
 
 }
-const store = configureStore(initialState);
+const store = configureStore(/*initialState*/);
+console.log("App state : ",store.getState());
 
 ReactDOM.render(
     <BrowserRouter>
     <Provider store={store}>
-        <App />
+        <App userState={store.getState().user} tasksState={store.getState().tasks}/>
     </Provider>
 
         

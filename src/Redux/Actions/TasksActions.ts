@@ -1,12 +1,12 @@
 import {ITask} from '../../Types/AppTypes';
-import {LOAD_TASKS, CREATE_TASK,EDIT_TASK,DELETE_TASK,TasksActionTypes} from './TasksActionsTypes';
+import {LOAD_TASKS, CREATE_TASK,EDIT_TASK,COMPLETE_TASK,TasksActionTypes} from './TasksActionsTypes';
 
 
 
-export function loadTasks(task:ITask):TasksActionTypes {
+export function loadTasks(tasks:ITask[]):TasksActionTypes {
     return {
-        type: CREATE_TASK,
-        payload: task
+        type: LOAD_TASKS,
+        payload: tasks
     }
 }
 export function creatTask(task:ITask):TasksActionTypes {
@@ -23,7 +23,7 @@ export function editTask(task:ITask):TasksActionTypes {
 }
 export function deleteTask(task:ITask):TasksActionTypes {
     return {
-        type: DELETE_TASK,
+        type: COMPLETE_TASK,
         payload: task
     }
 }

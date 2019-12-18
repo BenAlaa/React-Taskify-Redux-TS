@@ -1,18 +1,20 @@
 import React, {Component} from 'react';
-import PropType from 'prop-types';
+import {Dispatch} from 'redux';
+
 import { Redirect } from 'react-router-dom';
-import { IAppState } from '../../Types/AppTypes';
+import { IAppState, IUser, IAppUserState } from '../../Types/AppTypes';
 import {getCurrentUser, Response} from '../../Services/authService';
 import {getUser} from '../../Services/userService';
 import {login} from '../../Services/authService';
 import Input from "../Common/Input/Input";
 import {connect, ConnectedProps} from 'react-redux';
 import {loginUser} from '../../Redux/Actions/UserActions';
+import {UserActionTypes} from '../../Redux/Actions/UserActionsTypes';
 import loginImage from './Assets/icon_login_grey.png';
 import "./login.css";
 
 export interface LoginProps {
-    
+    // loginUser(user:IUser):UserActionTypes;
 }
  
 export interface LoginState {
@@ -23,13 +25,21 @@ export interface LoginState {
 	errors:{
 		email:string;
 		password:string;
-	}
+	};
+	// user?:IUser
 }
- 
+interface IMapStateToProps{
+
+}
+interface IMapDispatchToProps{
+	loginUser:(user:IUser) => UserActionTypes;
+}
+type LoginUserProps =IMapStateToProps&IMapDispatchToProps
 class Login extends Component<LoginProps, LoginState> {
-    state = { 
+    state:LoginState = { 
         data: {email: '', password: '' },
-        errors: {email: '', password: ''}  
+		errors: {email: '', password: ''}
+		  
 	}
 
 	handleSubmit =async (e:React.FormEvent<HTMLFormElement>) => {
@@ -38,7 +48,10 @@ class Login extends Component<LoginProps, LoginState> {
 		const response = await login(email, password);
 		if(response === Response.Success){
 			const user =await getUser(email);
-			// this.props.dispatch
+			const AppUser :IUser=user as IUser;
+			console.log('login action',loginUser(user as IUser))
+			console.log('Login props ',this.props);
+			console.log('App User: ',AppUser);
 			window.location.pathname = '/tasks';
 		}
 		else if(response === Response.Fail){
@@ -87,15 +100,15 @@ class Login extends Component<LoginProps, LoginState> {
 }
 
  
-function mapStateToProps (state: IAppState){
-	return{
-		user:state.user.user
-	}
+const mapStateToProps = (state:IAppUserState) : IAppUserState=> {
+	return state;
 }
 
-// function mapDispatchToProps ={
-// 	loginUser: () =>({
-
-// 	})
-// }
-export default connect(mapStateToProps)(Login);
+const mapDispatchToProps = (dispatch:Dispatch ) => {
+	return {
+		loginUser: (user : IUser) => {
+			dispatch(loginUser(user))
+		}
+	}
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Login);

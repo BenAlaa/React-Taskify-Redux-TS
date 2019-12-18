@@ -14,8 +14,6 @@ export interface TaskCardProps {
  
 const TaskCard: React.SFC<TaskCardProps> = ({description,isCompleted}) => {
     const descriptionClasses = isCompleted === "true"? "description-container-completed":"description-container";
-    console.log('descriptionClasses :', descriptionClasses);
-    console.log('isCompleted',isCompleted);
     return ( 
         <div className="container-fluid task-container col-12">
             <div className="row ">

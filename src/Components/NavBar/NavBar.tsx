@@ -2,14 +2,16 @@ import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../../Assets/Logo/logo.png';
 import "./NavBar.css";
+import { IUser } from '../../Types/AppTypes';
 
 export interface NavBarProps {
-    user: any;
+    user: IUser|null;
 }
 
 const NavBar: React.SFC<NavBarProps> = ({ user }) => {
+    console.log('NavBar User :',user);
     return (
-
+        
         <nav className="navbar navbar-expand-lg navbar-light  navbar-inner fixed-top unAuth-navbar ">
             <div className="container">
                 <NavLink className="navbar-brand" to="/main"><img src={logo} alt="logo" className="logo" />Taskify</NavLink>
@@ -28,11 +30,12 @@ const NavBar: React.SFC<NavBarProps> = ({ user }) => {
                         <li className="nav-item navbar-item">
                             <NavLink className="nav-link" to="/tasks">ToDo</NavLink>
                         </li>
-                        {user &&
-                            <li className="nav-item navbar-item">
+                        {/* {user &&
+                            
+                        } */}
+                        <li className="nav-item navbar-item">
                                 <NavLink className="nav-link" to="/profile">Profile</NavLink>
                             </li>
-                        }
 
                         {!user &&
                             <li className="nav-item navbar-item">
