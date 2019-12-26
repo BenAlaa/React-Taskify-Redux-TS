@@ -32,10 +32,6 @@ const Profile: React.SFC<ProfileProps> = ({user}:ProfileProps) => {
                     <div className="info-value col-md-9 col-lg-10">{`${user?.age} years`}</div>
                 </div>
                 <div className="row col-12 info-container">
-                    <div className="info-key col-md-3 col-lg-2">Age  :</div>
-                    <div className="info-value col-md-9 col-lg-10">{`${user?.age} years`}</div>
-                </div>
-                <div className="row col-12 info-container">
                     <div className="info-key col-md-3 col-lg-2">Hobbies  :</div>
                     <div className="info-value col-md-9 col-lg-10">{user?.hobbies}</div>
                 </div>

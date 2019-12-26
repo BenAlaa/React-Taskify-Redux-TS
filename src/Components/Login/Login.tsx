@@ -19,11 +19,11 @@ export interface LoginProps {
  
 export interface LoginState {
     data:{
-		email:string;
+		username:string;
 		password:string;
 	};
 	errors:{
-		email:string;
+		username:string;
 		password:string;
 	};
 	// user?:IUser
@@ -37,17 +37,17 @@ interface IMapDispatchToProps{
 type LoginUserProps =IMapStateToProps&IMapDispatchToProps
 class Login extends Component<LoginProps, LoginState> {
     state:LoginState = { 
-        data: {email: '', password: '' },
-		errors: {email: '', password: ''}
+        data: {username: '', password: '' },
+		errors: {username: '', password: ''}
 		  
 	}
 
 	handleSubmit =async (e:React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const {email, password} = this.state.data;
-		const response = await login(email, password);
+		const {username, password} = this.state.data;
+		const response = await login(username, password);
 		if(response === Response.Success){
-			const user =await getUser(email);
+			const user =await getUser(username);
 			const AppUser :IUser=user as IUser;
 			console.log('login action',loginUser(user as IUser))
 			console.log('Login props ',this.props);
@@ -55,7 +55,7 @@ class Login extends Component<LoginProps, LoginState> {
 			window.location.pathname = '/tasks';
 		}
 		else if(response === Response.Fail){
-			const errors={email:"Not Valid Email or Password",password:"Not Valid Email or Password"}
+			const errors={username:"Not Valid Username or Password",password:"Not Valid Username or Password"}
 			this.setState({errors});
 		}
 	};
@@ -64,8 +64,8 @@ class Login extends Component<LoginProps, LoginState> {
 		const data = { ...this.state.data };
 		const {name, value} = event.currentTarget;
 		switch (name) {
-			case "email":
-				data.email=value;
+			case "username":
+				data.username=value;
 			break;
 			case "password":
 				data.password=value;
@@ -88,7 +88,7 @@ class Login extends Component<LoginProps, LoginState> {
 						</div>
 						<div className="row form col-12 ">
 							<form className="col-12" onSubmit={this.handleSubmit}>
-								<Input onChange={this.handleChange} name="email" id="email" value={data.email} type="email" label="Email" error={errors.email} placeholder="Email" focus={true}/>
+								<Input onChange={this.handleChange} name="username" id="username" value={data.username} type="text" label="Username" error={errors.username} placeholder="Username" focus={true}/>
 								<Input onChange={this.handleChange} name="password" id="password" value={data.password} type="password" label="Password" error={errors.password} placeholder="Password" />
 								<button type="submit" className=" sub-btn col-3 offset-5">Login</button>
 							</form>

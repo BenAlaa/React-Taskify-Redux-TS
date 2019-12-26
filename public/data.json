@@ -3,7 +3,7 @@
         {
             "id":"1",
             "name":"Ahmed Alaa",
-            "email":"Admin@taskify.com",
+            "email":"Admin",
             "password":"54321",
             "age":"25",
             "dateOfBirth":"24-07-1994",
@@ -14,7 +14,7 @@
         {
             "id":"2",
             "name":"Amr rizk",
-            "email":"amr@taskify.com",
+            "email":"amr",
             "password":"123456",
             "age":"24",
             "dateOfBirth":"19-4-1995",
@@ -25,7 +25,7 @@
         {
             "id":"3",
             "name":"Ahmed Salem",
-            "email":"salem@taskify.com",
+            "email":"salem",
             "password":"123456",
             "age":"25",
             "dateOfBirth":"11-09-1994",
@@ -36,7 +36,7 @@
         {
             "id":"4",
             "name":"Ahmed Samir",
-            "email":"samir@taskify.com",
+            "email":"samir",
             "password":"123456",
             "age":"22",
             "dateOfBirth":"01-04-1997",

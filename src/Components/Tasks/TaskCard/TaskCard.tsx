@@ -1,5 +1,4 @@
 import React from 'react';
-import { faFacebook, faGoogle  } from "@fortawesome/free-brands-svg-icons";
 import {faPen,faCheck} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
