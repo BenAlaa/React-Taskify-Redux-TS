@@ -26,11 +26,12 @@ const App: React.FC<Props> = (props:Props) => {
       <NavBar user={/*props.userState.user*/user as IUser}></NavBar>
       <Switch>
         <Route path="/main" component={Main}></Route>
-        <ProtectedRout path="/tasks" render={(props:TasksProps) => <Tasks {...props}/>} />
+        {/* <ProtectedRout path="/tasks" render={(props:TasksProps) => <Tasks {...props}/>} /> */}
+        <Route path="/tasks" component={HOCProtectedRout(Tasks)} />
         <Route path="/login"  render={(props) => <Login {...props} history={props.history}/>}></Route>
         <Route path="/logout" component={Logout} />
-        <ProtectedRout path="/profile" render={() => <Profile user={props.userState.user}/>} />
-        {/* <Route path="/profile" component={HOCProtectedRout(Profile)} /> */}
+        {/* <ProtectedRout path="/profile" render={() => <Profile user={props.userState.user}/>} /> */}
+        <Route path="/profile" component={HOCProtectedRout(Profile)} />
         <Route path="/not-found" component={NotFound} />
         <Redirect from="/" exact to="/main" />
         <Redirect to="/not-found" />
