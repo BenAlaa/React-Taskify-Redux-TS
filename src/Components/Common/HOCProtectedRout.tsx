@@ -2,7 +2,6 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import { History } from 'history';
 import { IAppState } from './../../Types/AppTypes';
-import { thisTypeAnnotation } from '@babel/types';
 
 
 export interface HOCProtectedRoutProps {

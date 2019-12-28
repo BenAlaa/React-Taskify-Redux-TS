@@ -3,14 +3,13 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import {connect} from 'react-redux';
 import Main from './Components/Main/Main';
 import Logout from './Components/logout';
-import Login, { LoginProps } from './Components/Login/Login';
-import Profile,{ProfileProps} from "./Components/Profile/Profile";
-import Tasks, {TasksProps} from "./Components/Tasks/Tasks";
+import Login from './Components/Login/Login';
+import Profile from "./Components/Profile/Profile";
+import Tasks from "./Components/Tasks/Tasks";
 import NavBar from './Components/NavBar/NavBar';
-import ProtectedRout from './Components/Common/ProtectedRout';
 import HOCProtectedRout from './Components/Common/HOCProtectedRout';
 import NotFound from './Components/NotFound/NotFound';
-import {IUser, IAppState, IAppUserState, ITasksState} from './Types/AppTypes';
+import {IUser, IAppState, IAppUserState} from './Types/AppTypes';
 import {getCurrentUser} from './Services/authService';
 
 // import './App.css';

@@ -57,7 +57,7 @@ class AddTaskForm extends React.Component<AddTaskFormProps, AddTaskFormState> {
             case "category":
                 data.selectedCategory= value;
                 error.category = "";
-
+                break;
 
             default:
                 break;

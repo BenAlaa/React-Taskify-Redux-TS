@@ -15,7 +15,7 @@ const Profile: React.SFC<ProfileProps> = (props:ProfileProps) => {
     return ( 
         
         <div className="container profile-container">
-            <img src={image} className="profile-image row offset-3 offset-sm-3 offset-md-4 offset-lg-5 offset-xl-5" alt="profile Image"></img>
+            <img src={image} className="profile-image row offset-3 offset-sm-3 offset-md-4 offset-lg-5 offset-xl-5" alt="profile"></img>
             <div className="user-name row offset-3 offset-sm-3 offset-md-4 offset-lg-5 offset-xl-5">{user?.name}</div>
             <div className="user-title row offset-3 offset-sm-3 offset-md-4 offset-lg-5 offset-xl-5">{user?.title}</div>
             <div className="profile-info-container row col-10 offset-1">

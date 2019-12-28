@@ -1,11 +1,10 @@
 import React from 'react';
 import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-// import * as taskActions from '../../Services/taskService';
 import { getCategories } from '../../Services/categoryService';
 import TaskCard from './TaskCard/TaskCard';
 import TaskForm from '../Tasks/AddTaskForm/AddTask';
-import { ITasksState, ITask, ICategory, IUser } from '../../Types/AppTypes';
+import { ITasksState, ITask, ICategory } from '../../Types/AppTypes';
 import * as taskActions from '../../Redux/Actions/TasksActions';
 
 import "./Tasks.css";

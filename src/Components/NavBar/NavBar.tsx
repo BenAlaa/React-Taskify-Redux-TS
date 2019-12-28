@@ -9,7 +9,6 @@ export interface NavBarProps {
 }
 
 const NavBar: React.SFC<NavBarProps> = ({ user }) => {
-    console.log('NavBar User :',user);
     return (
         
         <nav className="navbar navbar-expand-lg navbar-light  navbar-inner fixed-top unAuth-navbar ">

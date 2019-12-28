@@ -7,7 +7,7 @@ import { History } from 'history';
 import {getCurrentUser, Response} from '../../Services/authService';
 import {login} from '../../Services/authService';
 import Input from "../Common/Input/Input";
-import {connect, ConnectedProps} from 'react-redux';
+import {connect} from 'react-redux';
 import {loginUser} from '../../Redux/Actions/UserActions';
 import {loadTasks} from '../../Redux/Actions/TasksActions';
 import {UserActionTypes} from '../../Redux/Actions/UserActionsTypes';

@@ -13,8 +13,8 @@ class Logout extends Component<LogoutProps> {
     componentDidMount(){
         logout();
         this.props.logoutUser();
-        // window.location.assign('/');
-        this.props.history.push('/');
+        window.location.assign('/');
+        // this.props.history.push('/');
     }
     render() { 
         return null;

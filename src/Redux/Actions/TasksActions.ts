@@ -1,6 +1,6 @@
 import {ITask} from '../../Types/AppTypes';
-import {Dispatch, AnyAction} from 'redux';
-import {LOAD_TASKS,LOAD_TASKS_SUCCESS, CREATE_TASK,EDIT_TASK,COMPLETE_TASK,TasksActionTypes} from './TasksActionsTypes';
+import {Dispatch} from 'redux';
+import {LOAD_TASKS_SUCCESS, CREATE_TASK,EDIT_TASK,COMPLETE_TASK,TasksActionTypes} from './TasksActionsTypes';
 import {getTasks} from '../../Services/taskService';
 
 

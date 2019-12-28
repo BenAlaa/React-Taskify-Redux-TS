@@ -1,4 +1,3 @@
-import http from './httpService';
 import jwt from 'jsonwebtoken';
 import jwtDecode from 'jwt-decode';
 import {IUser}  from '../Types/AppTypes';
