@@ -1,12 +1,24 @@
 import {ITask} from '../../Types/AppTypes';
-import {LOAD_TASKS, CREATE_TASK,EDIT_TASK,COMPLETE_TASK,TasksActionTypes} from './TasksActionsTypes';
+import {Dispatch, AnyAction} from 'redux';
+import {LOAD_TASKS,LOAD_TASKS_SUCCESS, CREATE_TASK,EDIT_TASK,COMPLETE_TASK,TasksActionTypes} from './TasksActionsTypes';
+import {getTasks} from '../../Services/taskService';
 
 
-
-export function loadTasks(tasks:ITask[]):TasksActionTypes {
+export function loadTasks() {
+    return function(dispatch:Dispatch) {
+        return getTasks()
+            .then(tasks => {
+                dispatch(loadTasksSuccess(tasks));
+            })
+            .catch(err => {
+                throw err;
+            });
+    };
+}
+export function loadTasksSuccess(tasks:ITask[]): TasksActionTypes{
     return {
-        type: LOAD_TASKS,
-        payload: tasks
+        type: LOAD_TASKS_SUCCESS,
+        payload: tasks 
     }
 }
 export function creatTask(task:ITask):TasksActionTypes {

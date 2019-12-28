@@ -1,20 +1,26 @@
 import React, {Component} from 'react';
-import {Dispatch} from 'redux';
+import {Dispatch,bindActionCreators} from 'redux';
 
 import { Redirect } from 'react-router-dom';
-import { IAppState, IUser, IAppUserState } from '../../Types/AppTypes';
+import { IAppState, IUser } from '../../Types/AppTypes';
+import { History } from 'history';
 import {getCurrentUser, Response} from '../../Services/authService';
 import {getUser} from '../../Services/userService';
 import {login} from '../../Services/authService';
 import Input from "../Common/Input/Input";
 import {connect, ConnectedProps} from 'react-redux';
 import {loginUser} from '../../Redux/Actions/UserActions';
+import {loadTasks} from '../../Redux/Actions/TasksActions';
+
 import {UserActionTypes} from '../../Redux/Actions/UserActionsTypes';
 import loginImage from './Assets/icon_login_grey.png';
 import "./login.css";
+import { ThunkDispatch } from 'redux-thunk';
 
 export interface LoginProps {
-    // loginUser(user:IUser):UserActionTypes;
+	loginUser:Function;
+	loadTasks:Function;
+	history:History<any>
 }
  
 export interface LoginState {
@@ -47,12 +53,9 @@ class Login extends Component<LoginProps, LoginState> {
 		const {username, password} = this.state.data;
 		const response = await login(username, password);
 		if(response === Response.Success){
-			const user =await getUser(username);
-			const AppUser :IUser=user as IUser;
-			console.log('login action',loginUser(user as IUser))
-			console.log('Login props ',this.props);
-			console.log('App User: ',AppUser);
-			window.location.pathname = '/tasks';
+			this.props.loginUser(username);
+			this.props.history.push('/tasks');
+			
 		}
 		else if(response === Response.Fail){
 			const errors={username:"Not Valid Username or Password",password:"Not Valid Username or Password"}
@@ -100,15 +103,14 @@ class Login extends Component<LoginProps, LoginState> {
 }
 
  
-const mapStateToProps = (state:IAppUserState) : IAppUserState=> {
+const mapStateToProps = (state:IAppState) : IAppState=> {
 	return state;
 }
 
 const mapDispatchToProps = (dispatch:Dispatch ) => {
 	return {
-		loginUser: (user : IUser) => {
-			dispatch(loginUser(user))
-		}
+		loginUser: bindActionCreators(loginUser, dispatch),
+		loadTasks: bindActionCreators(loadTasks, dispatch)
 	}
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Login);

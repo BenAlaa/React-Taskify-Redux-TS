@@ -11,9 +11,9 @@ export enum Response{
     Success,
     Fail
 }
-async function login(email: string, password: string, res?: Response) {
+async function login(username: string, password: string, res?: Response) {
     const users = await getUsers();
-    const user: IUser = users.find((user: any) => user.email === email);
+    const user: IUser = users.find((user: any) => user.username === username);
     if (!user) return res = Response.Fail;
 
     const isValidPassword: boolean = user.password === password;
@@ -35,7 +35,15 @@ function logout() {
 }
 
 function generateAuthToken(user: IUser): string {
-    const token = jwt.sign({ id: user.id, name: user.name, email: user.email }, "jwtPrivateKey");
+    const token = jwt.sign({ 
+        id: user.id, 
+        name: user.name, 
+        username: user.username, 
+        age: user.age, 
+        dateOfBirth: user.dateOfBirth, 
+        title: user.title, 
+        bio: user.bio, 
+        hobbies: user.hobbies }, "jwtPrivateKey");
     return token;
 }
 

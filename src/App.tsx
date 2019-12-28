@@ -8,18 +8,19 @@ import Profile,{ProfileProps} from "./Components/Profile/Profile";
 import Tasks, {TasksProps} from "./Components/Tasks/Tasks";
 import NavBar from './Components/NavBar/NavBar';
 import ProtectedRout from './Components/Common/ProtectedRout';
+import HOCProtectedRout from './Components/Common/HOCProtectedRout';
 import NotFound from './Components/NotFound/NotFound';
 import {IUser, IAppState, IAppUserState, ITasksState} from './Types/AppTypes';
 import {getCurrentUser} from './Services/authService';
 
 // import './App.css';
 interface Props {
-  userState:IAppUserState,
-  tasksState:ITasksState
+  userState:IAppUserState
 }
 
 const App: React.FC<Props> = (props:Props) => {
     const user = getCurrentUser();
+    console.log('App props: ',props);
     
 
   return (
@@ -28,9 +29,10 @@ const App: React.FC<Props> = (props:Props) => {
       <Switch>
         <Route path="/main" component={Main}></Route>
         <ProtectedRout path="/tasks" render={(props:TasksProps) => <Tasks {...props}/>} />
-        <Route path="/login"  render={(props:LoginProps) => <Login {...props}/>}></Route>
+        <Route path="/login"  render={(props) => <Login {...props} history={props.history}/>}></Route>
         <Route path="/logout" component={Logout} />
         <ProtectedRout path="/profile" render={() => <Profile user={props.userState.user}/>} />
+        {/* <Route path="/profile" component={HOCProtectedRout(Profile)} /> */}
         <Route path="/not-found" component={NotFound} />
         <Redirect from="/" exact to="/main" />
         <Redirect to="/not-found" />
@@ -40,8 +42,8 @@ const App: React.FC<Props> = (props:Props) => {
     </React.Fragment>
   );
 }
-const mapStateToProps = (state:IAppState) : IAppState=> {
-  return state
+const mapStateToProps = (state:IAppState) : IAppUserState=> {
+  return state.user;
 }
 
 export default connect(mapStateToProps)(App);

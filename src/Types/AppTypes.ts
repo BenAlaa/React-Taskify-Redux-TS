@@ -1,18 +1,18 @@
 
 export interface ILoginState{
     data:{
-        email:string;
+        username:string;
         password:string;
     };
     errors:{
-        email:string;
+        username:string;
         password:string;
     }
 }
 export interface IUser{
     id: number;
     name: string;
-    email: string;
+    username: string;
     password?: string;
     age?: number;
     dateOfBirth?: string;

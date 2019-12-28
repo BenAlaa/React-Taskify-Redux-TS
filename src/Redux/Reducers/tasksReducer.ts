@@ -1,4 +1,4 @@
-import {CREATE_TASK,EDIT_TASK,COMPLETE_TASK,TasksActionTypes, LOAD_TASKS} from '../Actions/TasksActionsTypes';
+import {CREATE_TASK,EDIT_TASK,COMPLETE_TASK,TasksActionTypes, LOAD_TASKS, LOAD_TASKS_SUCCESS} from '../Actions/TasksActionsTypes';
 import {ITasksState, ITask} from '../../Types/AppTypes';
 
 
@@ -12,6 +12,11 @@ const  tasksReducer = (state = initialState, action :TasksActionTypes):ITasksSta
     switch(action.type){
 
         case LOAD_TASKS:{
+            return{
+                tasks:[...action.payload]
+            }
+        }
+        case LOAD_TASKS_SUCCESS:{
             return{
                 tasks:[...action.payload]
             }

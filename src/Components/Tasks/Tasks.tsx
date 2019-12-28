@@ -1,17 +1,20 @@
 import React from 'react';
-import {Dispatch} from 'redux';
+import {Dispatch, bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import { getTasks } from '../../Services/taskService';
+// import * as taskActions from '../../Services/taskService';
 import { getCategories } from '../../Services/categoryService'
 import { getCurrentUser } from '../../Services/authService';
 import TaskCard from './TaskCard/TaskCard';
 import { ITasksState, ITask, ICategory, IUser } from '../../Types/AppTypes';
-import {deleteTask,creatTask,editTask,loadTasks} from '../../Redux/Actions/TasksActions';
+import * as taskActions from '../../Redux/Actions/TasksActions';
 
 import "./Tasks.css";
 
 export interface TasksProps {
-    // tasks: ITasksState;
+    tasks: ITasksState;
+    taskActions: typeof taskActions;
+
+
 }
 
 export interface TasksState {
@@ -25,11 +28,9 @@ class Tasks extends React.Component<TasksProps, TasksState> {
         categories: []
     }
     async componentDidMount() {
-        const tasks: ITask[] = await getTasks("1");
-        const user =await getCurrentUser();
-
+        this.props.taskActions.loadTasks();
         const categories: ICategory[] = await getCategories();
-        this.setState({ tasks, categories });
+        this.setState({categories});
     }
     render() {
         return (
@@ -53,7 +54,7 @@ class Tasks extends React.Component<TasksProps, TasksState> {
                                     return (
                                         <div className={classes} key={`${cat.id}`} id={`nav-${cat.name}`} role="tabpanel" aria-labelledby={`nav-${cat.name}-tab`}>
                                             {
-                                               this.state.tasks.filter(t => t.categoryId === cat.id).map(t => {
+                                               this.props.tasks.tasks.filter(t => t.categoryId === cat.id).map(t => {
                                                    return(
                                                    <div className="tab-pane fade show active" key={`${t.id}`} id="nav-home" role="tabpanel" aria-labelledby={`nav-${cat.name}-tab`}>
                                                        <TaskCard description={t.description} id={t.id} isCompleted={`${t.isCompleted}`} userId={t.userId} categoryId={t.categoryId} ></TaskCard>
@@ -82,24 +83,13 @@ class Tasks extends React.Component<TasksProps, TasksState> {
     }
 }
 
-const mapStateToProps = (state:ITasksState) : ITasksState=> {
+const mapStateToProps = (state:ITask[]) : ITask[]=> {
 	return state;
 }
 
 const mapDispatchToProps = (dispatch:Dispatch ) => {
 	return {
-		deleteTask: (task : ITask) => {
-			dispatch(deleteTask(task));
-        },
-        editTask: (task : ITask) => {
-			dispatch(editTask(task));
-        },
-        createTask: (task : ITask) => {
-			dispatch(creatTask(task));
-        },
-        loadTasks: (tasks: ITask[]) => {
-            dispatch(loadTasks(tasks));
-        }
+        taskActions: bindActionCreators(taskActions, dispatch)
 	}
 }
 
