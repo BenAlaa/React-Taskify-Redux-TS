@@ -39,7 +39,7 @@
             "id":"1",
             "description":"Go to swimming trainning",
             "categoryId":"1",
-            "isCompleted":"true",
+            "isCompleted":"false",
             "userId":"1"
         },
         {

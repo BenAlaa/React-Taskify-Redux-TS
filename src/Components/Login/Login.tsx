@@ -5,17 +5,14 @@ import { Redirect } from 'react-router-dom';
 import { IAppState, IUser } from '../../Types/AppTypes';
 import { History } from 'history';
 import {getCurrentUser, Response} from '../../Services/authService';
-import {getUser} from '../../Services/userService';
 import {login} from '../../Services/authService';
 import Input from "../Common/Input/Input";
 import {connect, ConnectedProps} from 'react-redux';
 import {loginUser} from '../../Redux/Actions/UserActions';
 import {loadTasks} from '../../Redux/Actions/TasksActions';
-
 import {UserActionTypes} from '../../Redux/Actions/UserActionsTypes';
 import loginImage from './Assets/icon_login_grey.png';
 import "./login.css";
-import { ThunkDispatch } from 'redux-thunk';
 
 export interface LoginProps {
 	loginUser:Function;

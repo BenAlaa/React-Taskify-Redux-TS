@@ -20,8 +20,6 @@ interface Props {
 
 const App: React.FC<Props> = (props:Props) => {
     const user = getCurrentUser();
-    console.log('App props: ',props);
-    
 
   return (
     <React.Fragment>

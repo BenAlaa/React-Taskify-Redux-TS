@@ -37,11 +37,9 @@ const  tasksReducer = (state = initialState, action :TasksActionTypes):ITasksSta
         }
         case COMPLETE_TASK:{
             // get the index of task to be updated
-            const index =state.tasks.findIndex(t => t.id === action.payload.id);
-            const updatedTask = action.payload;
-            updatedTask.isCompleted = true;
-            // insert the updated task in the same index of the old task
-            const tasks:ITask[] ={...state.tasks.slice(0,index),...updatedTask,...state.tasks.splice(index+1)};
+            const tasks = [...state.tasks];
+            const index = tasks.indexOf(action.payload);
+            tasks[index].isCompleted=true;
             return{ tasks }
         }
         default:

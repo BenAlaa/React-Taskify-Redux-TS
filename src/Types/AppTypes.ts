@@ -29,7 +29,7 @@ export interface IAppUserState {
 
 
 export interface ICategory{
-    id: Number;
+    id: string;
     name:string;
 }
 
@@ -40,7 +40,7 @@ export interface ICategoryState{
 export interface ITask{
     id: number;
     description:string;
-    categoryId:number;
+    categoryId:string;
     userId:number;
     isCompleted:boolean;
 }
