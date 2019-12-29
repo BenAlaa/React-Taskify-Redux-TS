@@ -5,15 +5,16 @@ import "./NavBar.css";
 import { IUser } from '../../Types/AppTypes';
 
 export interface NavBarProps {
-    user: IUser|null;
+    user: IUser | null;
 }
 
 const NavBar: React.SFC<NavBarProps> = ({ user }) => {
     return (
-        
+
         <nav className="navbar navbar-expand-lg navbar-light  navbar-inner fixed-top unAuth-navbar ">
             <div className="container">
                 <NavLink className="navbar-brand" to="/main"><img src={logo} alt="logo" className="logo" />Taskify</NavLink>
+
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -33,8 +34,8 @@ const NavBar: React.SFC<NavBarProps> = ({ user }) => {
                             
                         } */}
                         <li className="nav-item navbar-item">
-                                <NavLink className="nav-link" to="/profile">Profile</NavLink>
-                            </li>
+                            <NavLink className="nav-link" to="/profile">Profile</NavLink>
+                        </li>
 
                         {!user &&
                             <li className="nav-item navbar-item">

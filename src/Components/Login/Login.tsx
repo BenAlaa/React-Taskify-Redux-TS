@@ -51,7 +51,9 @@ class Login extends Component<LoginProps, LoginState> {
 		const response = await login(username, password);
 		if(response === Response.Success){
 			this.props.loginUser(username);
-			this.props.history.push('/tasks');
+			// this.props.history.push('/tasks');
+			this.props.history.location.pathname="/tasks";
+
 			
 		}
 		else if(response === Response.Fail){
