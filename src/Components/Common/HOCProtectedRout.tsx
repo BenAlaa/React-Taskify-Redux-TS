@@ -1,11 +1,8 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
 import { History } from 'history';
-import { IAppState } from './../../Types/AppTypes';
 
 
 export interface HOCProtectedRoutProps {
-    isLoggedIn:Boolean;
     history:History<any>;
 }
  
@@ -16,12 +13,12 @@ export interface HOCProtectedRoutState {
 
  
 
-export default function(ComposedComponent: any) {
+export default function(ComposedComponent: any, isLoggedIn: Boolean) {
 
 
     class HOCProtectedRout extends React.Component<HOCProtectedRoutProps, HOCProtectedRoutState> {
-        componentWillMount(){
-            if(!this.props.isLoggedIn){
+        componentDidMount(){
+            if(!isLoggedIn){
                 this.props.history.push('/login');
             }
         }
@@ -31,11 +28,6 @@ export default function(ComposedComponent: any) {
              );
         }
     }
-    function mapStateToProps(state: IAppState) {
-        return{
-            isLoggedIn: state.user.isLoggedIn
-        }
-    }
      
-    return connect(mapStateToProps)(HOCProtectedRout);
+    return HOCProtectedRout;
 }

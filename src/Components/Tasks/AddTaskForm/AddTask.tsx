@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ITask, ICategory, IAppState } from '../../../Types/AppTypes';
+import { ITask, ICategory, IAppState, ITasksState } from '../../../Types/AppTypes';
 import { getCategories } from '../../../Services/categoryService';
 import * as taskActions from '../../../Redux/Actions/TasksActions';
 import Input from '../../Common/Input/Input';
@@ -65,7 +65,7 @@ class AddTaskForm extends React.Component<AddTaskFormProps, AddTaskFormState> {
         this.setState({ data });
 
     }
-    handleSubmit = (event: React.FormEvent<HTMLFormElement> ) => {
+    handleSubmit = (event: React.FormEvent<HTMLFormElement> | React.MouseEvent ) => {
         event.preventDefault();
         this.validate();
         const{error,data} = this.state;
@@ -103,23 +103,25 @@ class AddTaskForm extends React.Component<AddTaskFormProps, AddTaskFormState> {
                     <form className="col-12 container-fluid" onSubmit={this.handleSubmit} >
                         <Input onChange={this.handleChange}  name="description" id="description" value={data.description} type="text" label="Description" error={error.description} placeholder="Description" focus={true} />
                         <div className="input-group col-11 offset-1">
-                            <select className="custom-select" value={data.selectedCategory} onChange={this.handleChange} name="category" id="inputGroupSelect01">
-                                <option selected>Choose...</option>
+                            <select  className="custom-select" value={data.selectedCategory} onChange={this.handleChange} name="category" id="inputGroupSelect01">
+                                <option >Choose...</option>
                                 {data.categories.map(({id,name}) => {
-                                return <option value={`${id}`}>{name}</option>
+                                return <option key={id} value={`${id}`}>{name}</option>
                                 })}
                             </select>
                             {error.category && <div className="alert alert-danger error-container">{error.category}</div>}
                         </div>
-                        <button type="submit"  className=" sub-btn col-3 offset-5">Add</button>
+                        <button type="submit" onClick={this.handleSubmit}  className=" sub-btn col-3 offset-5" data-dismiss="modal">Add</button>
                     </form>
                 </div>
             </div>
         );
     }
 }
-const mapStateToProps = (state: IAppState): ITask[] => {
-    return state.tasks.tasks;
+const mapStateToProps = (state: IAppState): ITasksState => {
+    return {
+        tasks: state.tasks.tasks
+    }
 }
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {

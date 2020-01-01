@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import  {IUser, IAppState}  from '../../Types/AppTypes';
+import  {IUser, IAppState, IAppUserState}  from '../../Types/AppTypes';
 import {getCurrentUser} from '../../Services/authService'
 import image from '../Login/Assets/icon_login_grey.png';
 import './Profile.css';
@@ -10,7 +10,6 @@ export interface ProfileProps {
 
 const Profile: React.SFC<ProfileProps> = (props:ProfileProps) => {
     const user:IUser  = getCurrentUser() as IUser;
-    console.log('Profile User : ', user);
     
     return ( 
         
@@ -19,10 +18,6 @@ const Profile: React.SFC<ProfileProps> = (props:ProfileProps) => {
             <div className="user-name row offset-3 offset-sm-3 offset-md-4 offset-lg-5 offset-xl-5">{user?.name}</div>
             <div className="user-title row offset-3 offset-sm-3 offset-md-4 offset-lg-5 offset-xl-5">{user?.title}</div>
             <div className="profile-info-container row col-10 offset-1">
-                {/* <div className="row col-12 info-container">
-                    <div className="info-key col-md-3 col-lg-2">Username  :</div>
-                    <div className="info-value col-md-9 col-lg-10">{user?.username}</div>
-                </div> */}
                 <div className="row col-12 info-container">
                     <div className="info-key col-md-3 col-lg-2">Bio  :</div>
                     <div className="info-value col-md-9 col-lg-10">{user?.bio}</div>
@@ -44,8 +39,11 @@ const Profile: React.SFC<ProfileProps> = (props:ProfileProps) => {
      );
 }
  
-const mapStateToProps = (state:IAppState) : IUser | null=> {
-    return state.user.user;
+const mapStateToProps = ({user}:IAppState) : IAppUserState=> {
+    return  {
+        user : user.user,
+        isLoggedIn: user.isLoggedIn
+    }
 }
 
 export default connect(mapStateToProps)(Profile);
