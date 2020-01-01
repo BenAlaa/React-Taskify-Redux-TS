@@ -19,6 +19,7 @@ interface Props {
 
 const App: React.FC<Props> = (props:Props) => {
     const user = getCurrentUser();
+    const isLoggedIn = user ? true : false;
 
   return (
     <React.Fragment>
@@ -26,11 +27,11 @@ const App: React.FC<Props> = (props:Props) => {
       <Switch>
         <Route path="/main" component={Main}></Route>
         {/* <ProtectedRout path="/tasks" render={(props:TasksProps) => <Tasks {...props}/>} /> */}
-        <Route path="/tasks" component={HOCProtectedRout(Tasks)} />
+        <Route path="/tasks" component={HOCProtectedRout(Tasks, isLoggedIn)} />
         <Route path="/login"  render={(props) => <Login {...props} history={props.history}/>}></Route>
         <Route path="/logout" component={Logout} />
         {/* <ProtectedRout path="/profile" render={() => <Profile user={props.userState.user}/>} /> */}
-        <Route path="/profile" component={HOCProtectedRout(Profile)} />
+        <Route path="/profile" component={HOCProtectedRout(Profile, isLoggedIn)} />
         <Route path="/not-found" component={NotFound} />
         <Redirect from="/" exact to="/main" />
         <Redirect to="/not-found" />

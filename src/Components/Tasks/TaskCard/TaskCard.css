@@ -76,3 +76,25 @@
     -moz-box-shadow: 0px 0px 5px 3px #a6d7e454;
     box-shadow: 0px 0px 5px 3px #a6e4d454;
 }
+
+
+@media (max-width: 400px){
+    .description-container, .description-container-completed{
+        font-size: 10px;
+    }
+}
+@media (max-width: 767px){
+    .description-container, .description-container-completed{
+        font-size: 12px;
+    }
+}
+@media (max-width: 992px){
+    .description-container, .description-container-completed{
+        font-size: 14px;
+    }
+}
+@media (max-width: 1199px){
+    .description-container, .description-container-completed{
+        font-size: 16px;
+    }
+}
