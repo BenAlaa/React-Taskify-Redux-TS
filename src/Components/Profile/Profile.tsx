@@ -15,7 +15,7 @@ const Profile: React.SFC<ProfileProps> = (props: ProfileProps) => {
 
     return (
         <Container >
-            <ProfileContainer>
+            <ProfileContainer >
                 <Row>
                     <Col offset={3} smOffset={3} lgOffset={5} xlOffset={5} mdOffset={4}>
                         <ProfileImage src={image} alt="profile"></ProfileImage>
