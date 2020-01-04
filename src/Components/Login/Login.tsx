@@ -12,7 +12,6 @@ import { loginUser } from '../../Redux/Actions/UserActions';
 import { loadTasks } from '../../Redux/Actions/TasksActions';
 import { UserActionTypes } from '../../Redux/Actions/UserActionsTypes';
 import loginImage from './Assets/icon_login_grey.png';
-import "./login.css";
 
 export interface LoginProps {
 	loginUser: Function;
