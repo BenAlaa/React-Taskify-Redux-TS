@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Row, Col } from 'styled-bootstrap-grid';
+import { FormContainer, TaskForm, InputGroup, Select, Option, InputError, Button } from './AddTaskStyledComponents';
 import { ITask, ICategory, IAppState, ITasksState } from '../../../Types/AppTypes';
 import { getCategories } from '../../../Services/categoryService';
 import * as taskActions from '../../../Redux/Actions/TasksActions';
 import Input from '../../Common/Input/Input';
 
-import './AddTask.css';
 
 export interface AddTaskFormProps {
     taskActions: typeof taskActions;
@@ -44,10 +45,10 @@ class AddTaskForm extends React.Component<AddTaskFormProps, AddTaskFormState> {
         const categories: ICategory[] = await getCategories();
         const data = { ...this.state.data, categories };
         this.setState({ data });
-        
+
     }
     handleChange = (event: React.FormEvent<HTMLFormElement> | React.ChangeEvent<HTMLSelectElement>) => {
-        const {data, error} =  this.state ;
+        const { data, error } = this.state;
         const { name, value } = event.currentTarget;
         switch (name) {
             case "description":
@@ -55,7 +56,7 @@ class AddTaskForm extends React.Component<AddTaskFormProps, AddTaskFormState> {
                 error.description = "";
                 break;
             case "category":
-                data.selectedCategory= value;
+                data.selectedCategory = value;
                 error.category = "";
                 break;
 
@@ -65,56 +66,59 @@ class AddTaskForm extends React.Component<AddTaskFormProps, AddTaskFormState> {
         this.setState({ data });
 
     }
-    handleSubmit = (event: React.FormEvent<HTMLFormElement> | React.MouseEvent ) => {
+    handleSubmit = (event: React.FormEvent<HTMLFormElement> | React.MouseEvent) => {
         event.preventDefault();
         this.validate();
-        const{error,data} = this.state;
-        if(error.description === "" && error.category === ""){
-            const task:ITask ={
-                id:0,
-                description:data.description,
-                categoryId:data.selectedCategory,
-                isCompleted:false,
-                userId:1
+        const { error, data } = this.state;
+        if (error.description === "" && error.category === "") {
+            const task: ITask = {
+                id: 0,
+                description: data.description,
+                categoryId: data.selectedCategory,
+                isCompleted: false,
+                userId: 1
             }
             this.props.taskActions.creatTask(task);
-            data.description="";
-            data.selectedCategory="";
-            this.setState({data});
+            data.description = "";
+            data.selectedCategory = "";
+            this.setState({ data });
         }
         return;
 
     }
-    validate(){
-        if(!this.state.data.description){
-            const error={description:"Description is Required",category:""};
-            this.setState({error});
+    validate() {
+        if (!this.state.data.description) {
+            const error = { description: "Description is Required", category: "" };
+            this.setState({ error });
         }
-        if(!this.state.data.description){
-            const error={description:"Description is Required",category:""};
-            this.setState({error})
+        if (!this.state.data.description) {
+            const error = { description: "Description is Required", category: "" };
+            this.setState({ error })
         }
     }
     render() {
         const { data, error } = this.state;
         return (
-            <div className="container-fluid task-form-container col-12">
-                <div className="row task-form col-12">
-                    <form className="col-12 container-fluid" onSubmit={this.handleSubmit} >
-                        <Input onChange={this.handleChange}  name="description" id="description" value={data.description} type="text" label="Description" error={error.description} placeholder="Description" focus={true} />
-                        <div className="input-group col-11 offset-1">
-                            <select  className="custom-select" value={data.selectedCategory} onChange={this.handleChange} name="category" id="inputGroupSelect01">
-                                <option >Choose...</option>
-                                {data.categories.map(({id,name}) => {
-                                return <option key={id} value={`${id}`}>{name}</option>
-                                })}
-                            </select>
-                            {error.category && <div className="alert alert-danger error-container">{error.category}</div>}
-                        </div>
-                        <button type="submit" onClick={this.handleSubmit}  className=" sub-btn col-3 offset-5" data-dismiss="modal">Add</button>
-                    </form>
-                </div>
-            </div>
+            <FormContainer>
+                <Row>
+                    <Col col={12}>
+                        <TaskForm onSubmit={this.handleSubmit}>
+                            <Input onChange={this.handleChange} name="description" id="description" value={data.description} type="text" label="Description" error={error.description} placeholder="Description" focus={true} />
+                            <InputGroup>
+                                <Select value={data.selectedCategory} onChange={this.handleChange}>
+                                    <Option>Select Category ...</Option>
+                                    {data.categories.map(({id, name}) => {
+                                        return <Option key={id} value={`${id}`}>{name}</Option>
+                                    })}
+                                </Select>
+                                {error.category && <InputError>{error.category}</InputError>}
+                            </InputGroup>
+                            <Button onClick={this.handleSubmit} data-dismiss="modal" >Add</Button>
+
+                        </TaskForm>
+                    </Col>
+                </Row>
+            </FormContainer>
         );
     }
 }
