@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
+import { Nav, NavLogo, NavbarBrand, NavButton, NavbarToggelerIcon, NavBarCollapse, NavBarNav, NavBarItemActive, NavBarItem, NavBarLink, NavDropDown, NavDropdownItems } from './NavBarStyledComponents'
 import logo from '../../Assets/Logo/logo.png';
-import "./NavBar.css";
 import { IUser } from '../../Types/AppTypes';
+import { Container, Row } from 'styled-bootstrap-grid';
 
 export interface NavBarProps {
     user: IUser | null;
@@ -11,57 +12,56 @@ export interface NavBarProps {
 const NavBar: React.SFC<NavBarProps> = ({ user }) => {
     return (
 
-        <nav className="navbar navbar-expand-lg navbar-light  navbar-inner fixed-top unAuth-navbar ">
-            <div className="container">
-                <NavLink className="navbar-brand" to="/main"><img src={logo} alt="logo" className="logo" />Taskify</NavLink>
+        <Nav>
+            <Container>
+                <Row>
+                <NavLink className="navbar-brand" to="/main"><NavLogo src={logo}></NavLogo><NavbarBrand>Taskify</NavbarBrand></NavLink>
+                <NavButton data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <NavbarToggelerIcon></NavbarToggelerIcon>
+                </NavButton>
+                <NavBarCollapse>
+                    <NavBarNav>
+                        <NavBarItemActive >
+                            <NavLink className="nav-link"  to="/main">
+                                <NavBarLink>Main</NavBarLink>
+                            </NavLink>
+                        </NavBarItemActive>
 
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
+                        <NavBarItem>
+                            <NavLink className="nav-link" to="/tasks">
+                                <NavBarLink>ToDo</NavBarLink>
+                            </NavLink>
+                        </NavBarItem>
 
-                <div className="collapse navbar-collapse " id="navbarNavDropdown">
-                    <ul className="navbar-nav ml-auto  mt-2 mt-lg-0 ">
-                        <li className="nav-item active navbar-item col-lg-2">
-                            <NavLink className="nav-link " to="/main">Main </NavLink>
-                        </li>
+                        <NavBarItem>
+                            <NavLink className="nav-link" to="/profile">
+                                <NavBarLink>Profile</NavBarLink>
+                            </NavLink>
+                        </NavBarItem>
 
+                        {!user && <NavBarItem>
+                            <NavLink className="nav-link" to="/login">
+                                <NavBarLink>Login</NavBarLink>
+                            </NavLink>
+                        </NavBarItem>}
 
+                        {user && <NavDropDown>
+                            <NavLink className="nav-link dropdown-toggle" to="/profile" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {user.name}
+                            </NavLink>
+                            <NavDropdownItems>
+                                <NavLink className="dropdown-item" to="/tasks">ToDo</NavLink>
+                                <NavLink className="dropdown-item" to="/profile">Profile</NavLink>
+                                <NavLink className="dropdown-item" to="/logout">Logout</NavLink>
+                            </NavDropdownItems>
+                        </NavDropDown>}
+                    </NavBarNav>
+                </NavBarCollapse>
+                </Row>
+                
+            </Container>
 
-                        <li className="nav-item navbar-item">
-                            <NavLink className="nav-link" to="/tasks">ToDo</NavLink>
-                        </li>
-                        {/* {user &&
-                            
-                        } */}
-                        <li className="nav-item navbar-item">
-                            <NavLink className="nav-link" to="/profile">Profile</NavLink>
-                        </li>
-
-                        {!user &&
-                            <li className="nav-item navbar-item">
-                                <NavLink className="nav-link" to="/login">login</NavLink>
-                            </li>
-                        }
-                        {user &&
-                            <React.Fragment>
-                                <li className="nav-item dropdown navbar-item">
-                                    <NavLink className="nav-link dropdown-toggle" to="/profile" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        {user.name}
-                                    </NavLink>
-                                    <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <NavLink className="dropdown-item" to="/tasks">ToDo</NavLink>
-                                        <NavLink className="dropdown-item" to="/profile">Profile</NavLink>
-                                        <NavLink className="dropdown-item" to="/logout">Logout</NavLink>
-                                    </div>
-                                </li>
-                            </React.Fragment>
-
-                        }
-                    </ul>
-                </div>
-            </div>
-
-        </nav>
+        </Nav>
     );
 }
 
