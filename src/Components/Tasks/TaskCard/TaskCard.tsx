@@ -1,8 +1,8 @@
 import React from 'react';
+import {TaskContainer, Description, CompletedDescription, TaskBtnContainer, EditTaskBtn, CompleteTaskBtn} from './TaskCardStyledComponent';
+import { Row }from 'styled-bootstrap-grid';
 import {faPen,faCheck} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import './TaskCard.css';
 export interface TaskCardProps {
     id:number;
     description:string;
@@ -13,18 +13,17 @@ export interface TaskCardProps {
 }
  
 const TaskCard: React.SFC<TaskCardProps> = ({id, description,isCompleted,completeTask}) => {
-    const descriptionClasses = isCompleted === "true"? "description-container-completed":"description-container";
     return ( 
-        <div className="container-fluid task-container col-12">
-            <div className="row ">
-                <div className={`col-10 col-sm-10 col-xl-10 ${descriptionClasses}`}>{description}</div>
-                {isCompleted === "false" && <div className="col-1 col-sm-1 col-xl-1 task-btns-container ">
-                    <div className="row task-btn-icon-edit-container" ><FontAwesomeIcon className="" icon={faPen} /></div>
-                    <div className="row task-btn-icon-check-container " onClick={() => completeTask(id)}><FontAwesomeIcon className="" icon={faCheck} /></div>
-                </div>}
-    
-            </div>
-        </div>
+        <TaskContainer>
+            <Row>
+                {isCompleted === "true" && <CompletedDescription>{description}</CompletedDescription>}
+                {isCompleted === "false" && <Description>{description}</Description>}
+                {isCompleted === "false" && <TaskBtnContainer>
+                    <EditTaskBtn><FontAwesomeIcon className="" icon={faPen} /></EditTaskBtn>
+                    <CompleteTaskBtn onClick={() => completeTask(id)} ><FontAwesomeIcon className="" icon={faCheck} /></CompleteTaskBtn>
+                </TaskBtnContainer>}
+            </Row>
+        </TaskContainer>
      );
 }
  
