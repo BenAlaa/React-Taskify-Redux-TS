@@ -2,12 +2,13 @@ import React from 'react';
 import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getCategories } from '../../Services/categoryService';
+import { TasksContainer, Nav, NavTabs, ActiveTab, Tab, TabContent, TabPanel, ActiveTabPanel, AddTaskBtn, AddSympol, Modal, ModalDialog, ModalContent, ModalHeader, ModalTitle, CloseModalBtn, CloseSympol, ModalBody } from './TasksStyledComponents';
+import { Row, Col } from 'styled-bootstrap-grid';
 import TaskCard from './TaskCard/TaskCard';
 import TaskForm from '../Tasks/AddTaskForm/AddTask';
 import { ITasksState, ITask, ICategory, IAppState } from '../../Types/AppTypes';
 import * as taskActions from '../../Redux/Actions/TasksActions';
 
-import "./Tasks.css";
 
 export interface TasksProps {
     tasks: ITask[];
@@ -27,13 +28,13 @@ class Tasks extends React.Component<TasksProps, TasksState> {
         categories: []
     }
     async componentDidMount() {
-        if(this.props.tasks.length === 0){
+        if (this.props.tasks.length === 0) {
             this.props.taskActions.loadTasks();
         }
         const categories: ICategory[] = await getCategories();
         this.setState({ categories });
     }
-    completeTask(id:number){
+    completeTask(id: number) {
         console.log('clicked task id: ', id);
         const task = this.props.tasks.find(t => t.id === id);
         console.log('clicked task : ', task);
@@ -42,66 +43,69 @@ class Tasks extends React.Component<TasksProps, TasksState> {
     }
     render() {
         return (
-            <div className="container tasks-container">
-                <div className="row">
-                    <div className="col-12">
-                        <nav>
-                            <div className="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                {
-                                    this.state.categories.map(cat => {
-                                        const classes = `${cat.id}` === "1" ? "nav-item nav-link category-tab active" : "nav-item nav-link category-tab";
-                                        return <a className={classes} id={`nav-${cat.name}-tab`} key={`${cat.id}`} data-toggle="tab" href={`#nav-${cat.name}`} role="tab" aria-controls={`nav-${cat.name}`} aria-selected="true">{cat.name}</a>
-                                    })}
-
-                            </div>
-                        </nav>
-                        <div className="tab-content" id="nav-tabContent">
-                            {
-                                this.state.categories.map(cat => {
-                                    const classes = `${cat.id}` === "1" ? "tab-pane fade show active" : "tab-pane fade show"
+            <TasksContainer>
+                <Row>
+                    <Col col={12} >
+                        <Nav>
+                            <NavTabs>
+                                {this.state.categories.map(cat => {
+                                    if (`${cat.id}` === "1") return <ActiveTab id={`nav-${cat.name}-tab`} key={`${cat.id}`} data-toggle="tab" href={`#nav-${cat.name}`} role="tab" aria-controls={`nav-${cat.name}`} aria-selected="true">{cat.name}</ActiveTab>
+                                    else return <Tab id={`nav-${cat.name}-tab`} key={`${cat.id}`} data-toggle="tab" href={`#nav-${cat.name}`} role="tab" aria-controls={`nav-${cat.name}`} aria-selected="true">{cat.name}</Tab>
+                                })}
+                            </NavTabs>
+                        </Nav>
+                        <TabContent>
+                            {this.state.categories.map(cat => {
+                                if (`${cat.id}` === "1") {
                                     return (
-                                        <div className={classes} key={`${cat.id}`} id={`nav-${cat.name}`} role="tabpanel" aria-labelledby={`nav-${cat.name}-tab`}>
-                                            {
-                                                this.props.tasks.filter(t => t.categoryId === cat.id).map(t => {
-                                                    return (
-                                                        <div className="tab-pane fade show active" key={`${t.id}`} id="nav-home" role="tabpanel" aria-labelledby={`nav-${cat.name}-tab`}>
-                                                            <TaskCard description={t.description} id={t.id} isCompleted={`${t.isCompleted}`} completeTask={this.completeTask.bind(this)} userId={t.userId} categoryId={t.categoryId} ></TaskCard>
-                                                        </div>
-
-                                                    )
-
-                                                })
-                                            }
-                                        </div>
+                                        <ActiveTabPanel key={`${cat.id}`} id={`nav-${cat.name}`} role="tabpanel" aria-labelledby={`nav-${cat.name}-tab`}>
+                                            {this.props.tasks.filter(t => t.categoryId === cat.id).map(t => {
+                                                return (
+                                                    <ActiveTabPanel key={`${t.id}`} id="nav-home" role="tabpanel" aria-labelledby={`nav-${cat.name}-tab`}>
+                                                        <TaskCard description={t.description} id={t.id} isCompleted={`${t.isCompleted}`} completeTask={this.completeTask.bind(this)} userId={t.userId} categoryId={t.categoryId} ></TaskCard>
+                                                    </ActiveTabPanel>
+                                                )
+                                            })}
+                                        </ActiveTabPanel>
                                     )
-                                })
-                            }
-                        </div>
+                                }
+                                else {
+                                    return (
+                                        <TabPanel key={`${cat.id}`} id={`nav-${cat.name}`} role="tabpanel" aria-labelledby={`nav-${cat.name}-tab`}>
+                                            {this.props.tasks.filter(t => t.categoryId === cat.id).map(t => {
+                                                return (
+                                                    <ActiveTabPanel key={`${t.id}`} id="nav-home" role="tabpanel" aria-labelledby={`nav-${cat.name}-tab`}>
+                                                        <TaskCard description={t.description} id={t.id} isCompleted={`${t.isCompleted}`} completeTask={this.completeTask.bind(this)} userId={t.userId} categoryId={t.categoryId} ></TaskCard>
+                                                    </ActiveTabPanel>
+                                                )
+                                            })}
+                                        </TabPanel>
+                                    )
+                                }
+                            })}
+                        </TabContent>
 
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-3 offset-3">
-                        <button type="submit" className="add-task-btn fixed-bottom" data-toggle="modal" data-target="#TaskModal"><span className="add-sympol">+</span></button>
-                    </div>
-                </div>
-                <div className="modal fade" id="TaskModal"  role="dialog" aria-labelledby="TaskModalLabel" aria-hidden="true">
-                    <div className="modal-dialog " role="document">
-                        <div className="modal-content ">
-                            <div className="modal-header">
-                                <h5 className="modal-title" id="TaskModalLabel">Add Task</h5>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div className="modal-body">
-                                <TaskForm/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+                    </Col>
+                </Row>
+                <Row>
+                    <Col col={3} offset={3}>
+                            <AddTaskBtn data-toggle="modal" data-target="#TaskModal"><AddSympol>+</AddSympol></AddTaskBtn>
+                    </Col>
+                </Row>
+                <Modal id="TaskModal"  role="dialog" aria-labelledby="TaskModalLabel" aria-hidden="true">
+                    <ModalDialog>
+                            <ModalContent>
+                                <ModalHeader>
+                                    <ModalTitle id="TaskModalLabel">Add Task</ModalTitle>
+                                    <CloseModalBtn data-dismiss="modal" aria-label="Close"><CloseSympol aria-hidden="true">&times;</CloseSympol></CloseModalBtn>
+                                </ModalHeader>
+                                <ModalBody>
+                                    <TaskForm></TaskForm>
+                                </ModalBody>
+                            </ModalContent>
+                    </ModalDialog>
+                </Modal>
+            </TasksContainer>
         );
     }
 }
