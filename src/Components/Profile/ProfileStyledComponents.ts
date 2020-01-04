@@ -1,4 +1,6 @@
-.profile-container{
+import styled from 'styled-components';
+
+export const ProfileContainer = styled.div`
     margin-top: 80px;
     height: 90vh;
     padding: 50px;
@@ -7,9 +9,8 @@
     -moz-box-shadow: 0px 10px 30px 1px rgba(15, 15, 15, 0.2);
     box-shadow: 0px 5px 15px 2px rgba(15, 15, 15, 0.137);
     overflow: auto;
-}
-
-.profile-image{
+`
+export const ProfileImage = styled.img`
     height: 200px;
     width: 200px;
     padding: 20px;
@@ -19,36 +20,34 @@
     -webkit-box-shadow: 0px 10px 30px 1px rgba(15, 15, 15, 0.2);
     -moz-box-shadow: 0px 10px 30px 1px rgba(15, 15, 15, 0.2);
     box-shadow: 0px 5px 15px 2px rgba(15, 15, 15, 0.137);
-
-}
-.profile-image:hover{
-    -webkit-box-shadow: 0px 5px 30px 5px rgba(15, 15, 15, 0.192);
-    -moz-box-shadow: 0px 5px 30px 5px rgba(15, 15, 15, 0.192);
-    box-shadow: 0px 5px 30px 5px rgba(15, 15, 15, 0.192);
-}
-.user-name{
+    src: url(${props => props.src});
+    &:hover {
+        -webkit-box-shadow: 0px 5px 30px 5px rgba(15, 15, 15, 0.192);
+        -moz-box-shadow: 0px 5px 30px 5px rgba(15, 15, 15, 0.192);
+        box-shadow: 0px 5px 30px 5px rgba(15, 15, 15, 0.192);
+    }
+`
+export const UserName = styled.div`
     padding-left: 30px;
     font-weight: 600;
     font-size: 25px;
     margin-top: 10px;
     color: rgb(94, 94, 94);
-}
-.user-title{
+`
+
+export const UserTitle = styled.div`
     padding-left: 20px;
     font-weight: 400;
     font-size: 20px;
     margin-top: 0px;
     color: rgba(147, 117, 196, 0.698);
+`
 
-
-
-}
-
-.profile-info-container{
+export const ProfileInfoContainer = styled.div`
     margin-top: 10px;
-}
+`
 
-.info-container{
+export const InfoContainer = styled.div`
     padding: 10px;
     margin-left: 5px !important;
     margin-bottom: 10px !important;
@@ -57,17 +56,18 @@
     -webkit-box-shadow: 0px 10px 30px 1px rgba(15, 15, 15, 0.2);
     -moz-box-shadow: 0px 10px 30px 1px rgba(15, 15, 15, 0.2);
     box-shadow: 0px 5px 10px 2px rgba(15, 15, 15, 0.137);
-}
-.info-container:hover{
-    -webkit-box-shadow: 0px 5px 30px 5px rgba(15, 15, 15, 0.192);
-    -moz-box-shadow: 0px 5px 30px 5px rgba(15, 15, 15, 0.192);
-    box-shadow: 0px 5px 30px 5px rgba(15, 15, 15, 0.192);
-}
-.info-key{
+    &:hover {
+        -webkit-box-shadow: 0px 5px 30px 5px rgba(15, 15, 15, 0.192);
+        -moz-box-shadow: 0px 5px 30px 5px rgba(15, 15, 15, 0.192);
+        box-shadow: 0px 5px 30px 5px rgba(15, 15, 15, 0.192);
+    }
+`
+
+export const InfoKey = styled.div`
     font-weight: 700;
     color: rgba(0, 0, 0, 0.705);
-
-}
-.info-value{
+`
+export const InfoValue = styled.div`
     color: rgba(0, 0, 0, 0.52);
-}
+`
+
