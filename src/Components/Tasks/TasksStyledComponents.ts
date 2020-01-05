@@ -23,7 +23,7 @@ export const NavTabs = styled.div.attrs({
 `;
 
 export const Tab = styled.a.attrs({
-    className: "nav-item nav-link category-tab"
+    className: "nav-item nav-link"
 })`
     font-size: 18px;
     background-color: #cab7f7;
@@ -42,6 +42,21 @@ export const Tab = styled.a.attrs({
         -webkit-box-shadow: 0px 5px 15px 5px #a1b7f588;
         -moz-box-shadow: 0px 5px 15px 5px #a1b7f588;
         box-shadow: 0px 5px 15px 5px #a1b7f588;
+    }
+    @media (max-width: 200px) {
+        font-size: 10px;
+    }
+    @media (max-width: 400px) {
+        font-size: 10px;
+    }
+    @media (max-width: 767px) {
+        font-size: 12px;
+    }
+    @media (max-width: 992px) {
+        font-size: 14px;
+    }
+    @media (max-width: 1199px) {
+        font-size: 16px;
     }
 `;
 
@@ -65,6 +80,21 @@ export const ActiveTab = styled.a.attrs({
         -webkit-box-shadow: 0px 5px 15px 5px #a1b7f588;
         -moz-box-shadow: 0px 5px 15px 5px #a1b7f588;
         box-shadow: 0px 5px 15px 5px #a1b7f588;
+    }
+    @media (max-width: 200px) {
+        font-size: 10px;
+    }
+    @media (max-width: 400px) {
+        font-size: 10px;
+    }
+    @media (max-width: 767px) {
+        font-size: 12px;
+    }
+    @media (max-width: 992px) {
+        font-size: 14px;
+    }
+    @media (max-width: 1199px) {
+        font-size: 16px;
     }
 `;
 

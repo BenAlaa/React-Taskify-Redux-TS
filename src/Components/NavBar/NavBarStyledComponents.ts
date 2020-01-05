@@ -28,7 +28,7 @@ export const NavbarBrand = styled.div.attrs({
 `
 
 export const NavButton = styled.button.attrs({
-    className: "navbar-toggler offset-md-8  ",
+    className: "navbar-toggler  offset-md-7 offset-sm-6 offset-xs-6",
     type: "button",
 })`
     margin-right: 10px;
@@ -41,13 +41,17 @@ export const NavbarToggelerIcon = styled.span.attrs({
 export const NavBarCollapse = styled.div.attrs({
     id: "navbarNavDropdown",
     className: "collapse navbar-collapse"
-})``;
+})`
+    background-color: #fff !important;
+
+`;
 
 export const NavBarNav = styled.ul.attrs({
     className: "navbar-nav ml-auto  mt-2 mt-lg-0"
 })`
     margin-top: 0px !important;
     margin-bottom: 0px !important;
+    background-color: #fff !important;
 `;
 
 export const NavBarItem = styled.li.attrs({
